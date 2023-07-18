@@ -5,4 +5,5 @@
 <p>내용: {{ post.content }}</p>
 <P>작성자: {{post.writer}}</P>
 <P>작성일: {{post.created_at}}</P>
+<a href="{%url 'blog:edit' pk=post.pk%}" class="btn">수정</a>
 {% endblock %}
