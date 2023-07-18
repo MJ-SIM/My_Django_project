@@ -1,7 +1,7 @@
 from typing import Any, Dict
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.views import View
 from .models import Post
 from .forms import PostForm
@@ -42,3 +42,7 @@ class Update(UpdateView):
     def get_success_url(self):
         post = self.get_object()
         return reverse_lazy('blog:detail', kwargs={'pk':post.pk})
+    
+class Delete(DeleteView):
+    model = Post
+    success_url = reverse_lazy('blog:list')

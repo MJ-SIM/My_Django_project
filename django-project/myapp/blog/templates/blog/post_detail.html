@@ -6,4 +6,8 @@
 <P>작성자: {{post.writer}}</P>
 <P>작성일: {{post.created_at}}</P>
 <a href="{%url 'blog:edit' pk=post.pk%}" class="btn">수정</a>
+<form action="{%url 'blog:delete' pk=post.pk%}" method='post'>
+    {% csrf_token %}
+    <input type="submit" value="삭제" class="btn">
+</form>
 {% endblock %}
