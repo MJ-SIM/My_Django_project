@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.views import View
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy
 
 
@@ -46,3 +46,10 @@ class Update(UpdateView):
 class Delete(DeleteView):
     model = Post
     success_url = reverse_lazy('blog:list')
+
+
+class CommentWrite(CreateView):
+    model = Comment
+    form_class= CommentForm
+    template_name = 'blog/comment_form'
+    success_url = reverse_lazy('blog:detail')
