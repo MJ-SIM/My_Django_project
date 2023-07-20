@@ -1,29 +1,34 @@
-{% extends 'blog/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>블로그 게시판 화면</h1>
     <p>블로그 게시판 첫 화면 입니다.</p>
-        <a href="{%url 'blog:write'%}" class="btn btn-outline-success">글 작성</a>
-    {% if posts %}
-    <table class="table table-bordered"
-    >
-        <thead class="table-dark">
-            <td>제목</td>
-            <td>내용</td>
-            <td>작성자</td>
-        </thead>
-        {% for post in posts %}
-        <tr>
-            <td>
-                <a href="{%url 'blog:detail' pk=post.pk %}">
-                    {{post.title}}
-                </a>
-            </td>
-            <td>{{post.writer}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% else %}
-    <p>작성된 게시물이 없습니다.</p>
-    {% endif %}
-{% endblock content %}
+    <form action="{% url 'blog:write' %}" method="get">
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ request.GET.next }}">
+        <input type="submit" value="글 작성">
+    </form>
+    {% comment %} <a href="{% url 'blog:write' %}" class="btn btn-outline-success">글 작성</a> {% endcomment %}
+    <!-- 글이 있을때 -->
+    <!-- 테이블 -->
+    <!-- 조건문 -->
+    {%if posts%}
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <td>제목</td>
+                <td>내용</td>
+                <td>작성자</td>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <td><a href="{% url 'blog:detail' pk=post.pk %}">{{post.title}}</a></td>
+                        <td>{{post.writer}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {%else%}
+    <!-- 글이 없을때 문구 출력 -->
+        <p>작성된 게시물이 없습니다</p>
+    {%endif%}
+
+{% endblock %}

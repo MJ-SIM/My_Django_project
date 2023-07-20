@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, HashTag
 
 class PostForm(forms.ModelForm):
 
@@ -13,3 +13,13 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
+        widgets ={
+            'content': forms.Textarea(attrs={'rows':'2', 'cols':'35'})
+        }
+
+
+class HashTagForm(forms.ModelForm):
+
+    class Meta:
+        model = HashTag
+        fields = ['name']
