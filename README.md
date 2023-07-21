@@ -221,6 +221,15 @@ wcwidth==0.2.6
     접근 시도 시 <존재하지 않는 게시글입니다> 라는 페이지를 보여줍니다.    
 
 
+### UI
+
+
+![Alt text](KakaoTalk_20230721_142252860.png)
+
+
+![Alt text](KakaoTalk_20230721_142315646.png)
+
+
 ```
     # user/
     path('register/', views.Registration.as_view(), name='register'),
