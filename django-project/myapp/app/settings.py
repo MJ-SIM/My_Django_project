@@ -45,9 +45,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
+    'django_extensions',
     'blog',
     'user'
 ]
+
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
