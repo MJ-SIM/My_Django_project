@@ -3,7 +3,35 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/view.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
-    <p>블로그 게시판 첫 화면 입니다.</p>
+<link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/list.css' %}">
+<div class="main">
+    <p class="main-title">블로그 게시판 첫 화면 입니다.</p>
+    <div class="board-top">
+        <p class="main-desc"><strong>2개</strong>의 게시글이 있습니다.</p>
+    
+        <div>
+            <label for="category" class="a11y-hidden">카테고리</label>
+            <select id="category">
+                <option>전체</option>
+                <option>공지사항</option>
+                <option>일반</option>
+            </select>
+            <form class="search-form">
+                <label for="search" class="a11y-hidden">검색</label>
+                <input id="search" type="search" placeholder="검색어를 입력해주세요">
+                <button type="submit">
+                <img src="./img/icon-search.png" alt="검색">
+                </button>
+            </form>
+
+            <label for="sort" class="a11y-hidden">정렬</label>
+            <select id="sort">
+                <option>조회순</option>
+                <option>최신순</option>
+            </select>
+        </div>
+    </div>
     <form action="{% url 'blog:write' %}" method="get">
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ request.GET.next }}">
         <input type="submit" value="글 작성">
@@ -12,24 +40,69 @@
     <!-- 테이블 -->
     <!-- 조건문 -->
     {%if posts%}
-        <table class="table table-bordered">
+        <table class="table list">
+            <colgroup>
+                <col style="width: 40px">
+                <col style="width: 60px">
+                <col>
+                <col style="width: 100px">
+                <col style="width: 120px">
+                <col style="width: 100px">
+            </colgroup>
             <thead class="table-dark">
-                <td>제목</td>
-                <td>내용</td>
-                <td>작성자</td>
+                <tr>
+                    <th>
+                        <input type="checkbox" id="all-article">
+                        <!-- <label for="all-article">페이지 전체 게시글 선택</label> -->
+                    </th>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>작성자</th>
+                    <th>조회수</th>
+                </tr>
             </thead>
             <tbody>
                 {% for post in posts %}
                     <tr>
-                        <td><a href="{% url 'blog:detail' pk=post.pk %}">{{post.title}}</a></td>
+                        <td>
+                            <input type="checkbox" id="all-article">
+                        </td>
+                        <td>{{post.pk}}</td>
+                        
+                        <td>
+                            <a href="{% url 'blog:detail' pk=post.pk %}">{{post.title}}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'blog:detail' pk=post.pk %}">{{post.content}}</a>
+                        </td>
                         <td>{{post.writer}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <div class="board-bottom">
+            <!-- 페이지 -->
+            <div class="pagination">
+                <a href="#"><img src="../static/asset/img/first.png" alt="첫번째 페이지"></a>
+                <a href="#"><img src="../static/asset/img/prev.png" alt="이전 페이지"></a>
+                <a href="#" class="num active">1</a>
+                <a href="#" class="num">2</a>
+                <a href="#" class="num">3</a>
+                <a href="#" class="num">4</a>
+                <a href="#" class="num">5</a>
+                <a href="#"><img src="../static/asset/img/next.png" alt="첫번째 페이지"></a>
+                <a href="#"><img src="../static/asset/img/last.png" alt="이전 페이지"></a>
+                </div>
+                <!-- //페이지 -->
+            </div>
     {%else%}
     <!-- 글이 없을때 문구 출력 -->
         <p>작성된 게시물이 없습니다</p>
     {%endif%}
+    <!-- footer -->
+    <p class="footer">Copyright 2023. Chilli All rights reserved.</p>
+    <!-- //footer -->
+</div>
 
 {% endblock %}

@@ -41,7 +41,7 @@ class Write(LoginRequiredMixin, View):
         context={
             'form': form
         }
-        return render(request, 'blog/post_form.html')
+        return render(request, 'blog/post_form.html', context)
 
 
 class DetailView(View):

@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/view.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/list.css' %}">
     <p>블로그 글 작성 화면</p>
+    
     <!-- 내용 -->
     <form action="{%url 'blog:write'%}" method="post">
         {% csrf_token %}
